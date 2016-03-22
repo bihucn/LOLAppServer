@@ -21,7 +21,7 @@ public class BaseDaoImpl extends HibernateDaoSupport implements BaseDao {
 		 super.setSessionFactory(sessionFactory);
 	 }
 	
-
+	@Override
 	public Object queryItem(Class<?> clazz,Serializable id) {
 		Object o = null;
         try
@@ -36,5 +36,8 @@ public class BaseDaoImpl extends HibernateDaoSupport implements BaseDao {
         return o;
 		
 	}
+
+
+
 
 }

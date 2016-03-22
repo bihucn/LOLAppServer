@@ -1,6 +1,8 @@
 package com.lol.common.dao;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -10,7 +12,9 @@ import java.io.Serializable;
  */
 public interface BaseDao {
 	
-	public Object queryItem(Class<?> clazz,Serializable id);
+
 	
+	public Object queryItem(Class<?> clazz,Serializable id) ;
+   
 
 }

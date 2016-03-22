@@ -7,6 +7,7 @@
 	xmlns:jms="http://www.springframework.org/schema/jms" xmlns:lang="http://www.springframework.org/schema/lang"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd  
@@ -25,61 +26,15 @@
 	<!-- 默认的注解映射的支持 -->
 	<context:component-scan base-package="com.lol" />
 	
+	<mvc:annotation-driven/>
+	
+	<mvc:default-servlet-handler/>
+	
 	<!-- 扫描装载类 -->
 	<!-- Aspect支持 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
-	<!--配置多种视图解析器 -->
 	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" /> 
-	
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="ignoreAcceptHeader" value="true" />
-		<property name="defaultContentType" value="text/html" />
-		<!-- 使用ContentNegotiatingViewResolver这个视图解析器允许你用同样的内容数据来呈现不同的view -->
-		<property name="mediaTypes"><!-- 相同的数据不同的返回类型 -->
-			<map>
-				<entry key="json" value="application/json" />
-				<entry key="jsonp" value="application/javascript" />
-				<entry key="xml" value="application/xml" />
-				<entry key="xls" value="application/vnd.ms-excel" />
-			</map>
-		</property>
-		<property name="favorParameter" value="true" />
-		<property name="viewResolvers">
-			<list>
-				<!-- JSP视图 -->
-				<bean
-					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
-						/>
-					<property name="prefix" value="/WEB-INF/view/" />
-					<property name="suffix" value=".jsp"></property>
-				</bean>
-			</list>
-		</property>
-	</bean>
- 
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-	
-	<!-- json转换 --> 
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<util:list id="beanList">
-				<ref bean="mappingJacksonHttpMessageConverter" />
-			</util:list>
-		</property>
-	</bean>
-	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=UTF-8</value>
-				<value>apolication/json;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
 	
 	
 	<context:property-placeholder location="classpath:db.properties" />
@@ -150,22 +105,6 @@
 		<aop:pointcut id="allServiceMethod" expression="execution (* com.lol.common.service.impl.*.*(..))" />
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="allServiceMethod" />
 	</aop:config>
-
-	<!-- 参数配置文件 -->
-	<!-- <bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>WEB-INF/properties/database.properties</value>
-			</list>
-		</property>
-	</bean> -->
-	
-	
-	
-	
-	
-	
 
 	
 </beans>
