@@ -1,6 +1,5 @@
 package com.lol.common.dao;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public interface BaseDao {
 	
 
 	
-	public Object queryItem(Class<?> clazz,Serializable id) ;
+	public List<?> findByHql(final String hql, final Map<String, Object> map);
    
 
 }

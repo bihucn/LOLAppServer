@@ -8,6 +8,7 @@ public class CategoryDto implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private Integer categoryId;
 	
  	private String categoryName;
@@ -21,11 +22,12 @@ public class CategoryDto implements Serializable {
 	public CategoryDto(){}
 	
 	public CategoryDto(Integer categoryId, String categoryName,
-			String categoryCode) {
+			String categoryCode, String categoryFace) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
 		this.categoryCode = categoryCode;
+		this.categoryFace = categoryFace;
 	}
 	
 	

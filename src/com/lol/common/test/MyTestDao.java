@@ -1,12 +1,14 @@
 package com.lol.common.test;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.lol.common.entity.Category;
+import com.lol.common.dto.CategoryDto;
 import com.lol.common.service.CategoryService;
 
 
@@ -21,11 +23,11 @@ public class MyTestDao {
 	
 	@Test
 	public void testGet() throws Exception {
-		Category cate = new Category();
 		
-		
-		Category item = (Category) categoryService.getItem(cate.getClass(), 2);
-		System.out.println(item.getCategoryName());
+		List<CategoryDto> categoryDtosByCategoryType = categoryService.getCategoryDtosByCategoryType((short) 1);
+		for (CategoryDto categoryDto : categoryDtosByCategoryType) {
+			System.out.println(categoryDto.getCategoryName());
+		}
 	}
 	
 	
